@@ -14,17 +14,17 @@ Documentation: https://www.hpc.iastate.edu/guides/containers
 %setup
     touch ${SINGULARITY_ROOTFS}/my.cnf
     touch ${SINGULARITY_ROOTFS}/mysqlrootpw
-    touch ${SINGLUARITY_ROOTFS}/usr/local/bin/create_remote_admin_user.sh
+    touch ${SINGLUARITY_ROOTFS}/create_remote_admin_user.sh
 
 
 %files
     my.cnf /my.cnf
     mysqlrootpw /mysqlrootpw
-    create_remote_admin_user.sh /usr/local/bin/create_remote_admin_user.sh
+    create_remote_admin_user.sh /create_remote_admin_user.sh
 
 
 %post
-    chmod +x /usr/local/bin/create_remote_admin_user.sh
+    chmod +x /create_remote_admin_user.sh
 
 
 %runscript
