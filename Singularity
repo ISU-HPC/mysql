@@ -3,12 +3,13 @@ From: mysql:5.7.21
 
 %help
 MariaDB (MySQL) server.
-Documentation: https://www.hpc.iastate.edu/guides/containers
+Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
 
 
 %labels
-    Maintainer Iowa State University High-Performance Computing Group
-    Version  v1.0
+    AUTHOR Robert Grandin rgrandin@iastate.edu
+    MAINTAINER Iowa State University High-Performance Computing Group
+    VERSION  v1.0
 
 
 %setup
@@ -28,7 +29,8 @@ Documentation: https://www.hpc.iastate.edu/guides/containers
 
 
 %runscript
-    if [ ! -w /var/lib/mysql ]
+    touch /var/lib/mysql/write_test
+    if [ ! -f /var/lib/mysql/write_test ]
     then
         echo '/var/lib/mysql is not writable.  Please see https://www.hpc.iastate.edu/guides/containers/mysql-server'
         echo 'for instructions on bind-mounting host directories into this container.'
