@@ -8,7 +8,9 @@ Please see https://www.hpc.iastate.edu/guides/containers/mysql-server for usage 
 ## Quick Start
 
 1. Make local directory structure for database information
-`> mkdir -p ${PWD}/mysql/var/lib/mysql ${PWD}/mysql/run/mysqld`
+```
+> mkdir -p ${PWD}/mysql/var/lib/mysql ${PWD}/mysql/run/mysqld
+```
 
 1. Download the sample .my.cnf and .mysqlpassword files
 ```
@@ -17,10 +19,14 @@ $ curl https://raw.githubusercontent.com/ISU-HPC/mysql/master/mysqlrootpw > ${HO
 ```    
 
 1. Launch an instance of the container, bind-mounting the local directories
-`> singularity instance.start --bind ${PWD}/mysql/var/lib/mysql/:/var/lib/mysql --bind ${PWD}/mysql/run/mysqld:/run/mysqld shub://ISU-HPC/mysql mysql`
+```
+> singularity instance.start --bind ${PWD}/mysql/var/lib/mysql/:/var/lib/mysql --bind ${PWD}/mysql/run/mysqld:/run/mysqld shub://ISU-HPC/mysql mysql
+```
 
 1. Run the container's runscript to initialize mysqld and then launch mysqld
-`> singularity run instance://mysql`
+```
+> singularity run instance://mysql
+```
 
 1. Verify mysqld is running by opening a shell in the container an starting the MySQL client
 ```
