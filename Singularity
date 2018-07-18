@@ -28,6 +28,12 @@ Documentation: https://www.hpc.iastate.edu/guides/containers
 
 
 %runscript
+    if [ ! -w /var/lib/mysql ]
+    then
+        echo '/var/lib/mysql is not writable.  Please see https://www.hpc.iastate.edu/guides/containers/mysql-server'
+        echo 'for instructions on bind-mounting host directories into this container.'
+    fi
+
     if [ ! -f ${HOME}/.my.cnf ]
     then
         echo "Copying my.cnf to ${HOME}"
