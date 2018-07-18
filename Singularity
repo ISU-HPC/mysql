@@ -29,6 +29,7 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
 
 
 %runscript
+    # Check that mysql directory is writeable.  If not, inform user of documentation and exit.
     touch /var/lib/mysql/write_test
     if [ ! -f /var/lib/mysql/write_test ]
     then
@@ -36,7 +37,9 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
         echo 'for instructions on bind-mounting host directories into this container.'
         exit 1
     fi
+    rm -f /var/lib/mysql/write_test
 
+    # Check for .my.cnf, and use default if necessary
     if [ ! -f ${HOME}/.my.cnf ]
     then
         echo "Copying my.cnf to ${HOME}"
@@ -45,6 +48,7 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
         echo "${HOME}/.my.cnf already exists.  Using that version."
     fi
 
+    # Check for .mysqlrootpw, and use default if necessary
     if [ ! -f ${HOME}/.mysqlrootpw ]
     then
         echo "Copying mysqlrootpw to ${HOME}"
@@ -53,12 +57,14 @@ Documentation: https://www.hpc.iastate.edu/guides/containers/mysql-server
         echo "${HOME}/.mysqlrootpw already exists.  Using that version."
     fi
 
+    # Check for initialization
     if [ ! -d /var/lib/mysql/mysql ]
     then
         echo "Initializing mysqld"
         mysqld --initialize  --init-file=${HOME}/.mysqlrootpw
     fi
 
+    # Finally, launch mysqld
     echo ""
     echo "Start mysqld"
     mysqld  --init-file=${HOME}/.mysqlrootpw &
