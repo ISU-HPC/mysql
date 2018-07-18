@@ -32,6 +32,7 @@ Documentation: https://www.hpc.iastate.edu/guides/containers
     then
         echo '/var/lib/mysql is not writable.  Please see https://www.hpc.iastate.edu/guides/containers/mysql-server'
         echo 'for instructions on bind-mounting host directories into this container.'
+        exit 1
     fi
 
     if [ ! -f ${HOME}/.my.cnf ]
